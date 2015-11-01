@@ -43,12 +43,26 @@ public class SavingsAccount extends Account{
 		String minB = Double.toString(this.getMinBalance());
 		String intR = Double.toString(this.getInterestRate());
 		
-		return "Number:" + num + " " + "Owner:" + own + " " + "Balance:" + 
-		bal + " " + "Date:" + dO + " " + "Min Balance(Savings Exclusively):" + 
-		minB + " " + "Interest Rate(Savings Exclusively):" + intR;
+		return num + " " +own + " " + 
+		bal + " " + dO + " " + 
+		minB + " " + intR;
 	}
 	
-	//equals method
+	public boolean equals(Object o){
+		if (o instanceof SavingsAccount){
+			SavingsAccount given = (SavingsAccount) o;
+			if (this.getBalance() == given.getBalance() &&
+					this.getDateOpened() == given.getDateOpened() &&
+					this.getInterestRate() == given.getInterestRate() &&
+					this.getMinBalance() == given.getMinBalance() &&
+					this.getNumber() == given.getNumber() &&
+					this.getOwner() == given.getOwner() &&
+					this.getSerialVersionUID() == given.getSerialVersionUID())
+				return true;
+			return false;
+		}
+		return false;
+	}
 	
 	
 	

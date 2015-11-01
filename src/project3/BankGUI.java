@@ -137,7 +137,9 @@ public class BankGUI extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				if (rdbtnChecking.isSelected() && rdbtnSavings.isSelected()) {
+					JOptionPane.showMessageDialog(null, "You must pick either checkings or savings");
+				}
 				/**************************date********************/
 				int days = 0, month = 0, year = 0;
 				String dateS = textField_2.getText();
@@ -241,7 +243,9 @@ public class BankGUI extends JFrame {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				if (rdbtnChecking.isSelected() && rdbtnSavings.isSelected()) {
+					JOptionPane.showMessageDialog(null, "You must pick either checkings or savings");
+				}
 				int index = getIndex();
 				b.deleteAcc(index);
 				//tableModel.removeRow(index);
@@ -263,24 +267,15 @@ public class BankGUI extends JFrame {
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (rdbtnChecking.isSelected() && rdbtnSavings.isSelected()) {
+					JOptionPane.showMessageDialog(null, "You must pick either checkings or savings");
+				}
 
 				//				b.updateAcc(index, a);
 				//				listModel.remove(index);
 				//				listModel.add(index, a);
 
-				
-			
-				
-				
-				
-				
-				
-//				tableModel = (DefaultTableModel)
-//						accountsTable.getModel();
-//				tableModel.addRow(new Object[]{accNum,
-//						formattedDate ,accOwner,cBal,
-//						"", minBal, intRate});
-//				b.updateAcc(index, a);
+
 				tableModel = (DefaultTableModel) accountsTable.getModel();
 				if (accountsTable.getSelectedRow()==-1){
 					if(accountsTable.getRowCount() ==0) {
@@ -366,7 +361,7 @@ public class BankGUI extends JFrame {
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
 					b.addAcc(a);
-					
+
 					int index = getIndex();		
 					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
 					tableModel.setValueAt(accNum, index, 0);
@@ -376,11 +371,11 @@ public class BankGUI extends JFrame {
 					tableModel.setValueAt(mFee, index, 4);
 					tableModel.setValueAt(0, index, 5);
 					tableModel.setValueAt(0, index, 6);
-//					tableModel = (DefaultTableModel)
-//							accountsTable.getModel();
-//					tableModel.addRow(new Object[]{accNum,
-//							formattedDate ,accOwner,cBal,
-//							mFee});
+					//					tableModel = (DefaultTableModel)
+					//							accountsTable.getModel();
+					//					tableModel.addRow(new Object[]{accNum,
+					//							formattedDate ,accOwner,cBal,
+					//							mFee});
 					b.updateAcc(index, a);
 				}
 
@@ -398,43 +393,16 @@ public class BankGUI extends JFrame {
 					tableModel.setValueAt(0, index, 4);
 					tableModel.setValueAt(minBal, index, 5);
 					tableModel.setValueAt(intRate, index, 6);
-//					tableModel = (DefaultTableModel)
-//							accountsTable.getModel();
-//					tableModel.addRow(new Object[]{accNum,
-//							formattedDate ,accOwner,cBal,
-//							"", minBal, intRate});
+					//					tableModel = (DefaultTableModel)
+					//							accountsTable.getModel();
+					//					tableModel.addRow(new Object[]{accNum,
+					//							formattedDate ,accOwner,cBal,
+					//							"", minBal, intRate});
 					b.updateAcc(index, a);
 
 				}
-				
-				
-				
-				
-				
-				
-//				tableModel = (DefaultTableModel) accountsTable.getModel();
-//				if (accountsTable.getSelectedRow()==-1){
-//					if(accountsTable.getRowCount() ==0) {
-//						JOptionPane.showMessageDialog
-//						(null, "Table is empty"); 
-//					}
-//					else {
-//						JOptionPane.showMessageDialog
-//						(null, "You must select a row"); 
-//					}
-//				}
-					//tableModel.removeRow(index);
-//					
-//				
-//					int index = getIndex();		
-//					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
-//					tableModel.setValueAt(accNum, index, 0);
-//					tableModel.setValueAt(accOwner, index, 1);
-//					tableModel.setValueAt(cBal, index, 2);
-//					tableModel.setValueAt(gDate, index, 3);
-//					tableModel.setValueAt(mFee, index, 4);
-//					tableModel.setValueAt(minBal, index, 5);
-//					tableModel.setValueAt(intRate, index, 6);
+
+
 
 
 
