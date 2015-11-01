@@ -268,24 +268,10 @@ public class BankGUI extends JFrame {
 				//				listModel.remove(index);
 				//				listModel.add(index, a);
 
-			tableModel = (DefaultTableModel) accountsTable.getModel();
-			if (accountsTable.getSelectedRow()==-1){
-				if(accountsTable.getRowCount() ==0) {
-					JOptionPane.showMessageDialog
-					(null, "Table is empty"); 
-				}
-				else {
-					JOptionPane.showMessageDialog
-					(null, "You must select a row"); 
-				}
-			}
-				//tableModel.removeRow(index);
 				
-				String str = "hello";
-				int index = getIndex();		
-				//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
-				tableModel.setValueAt(textField, index, 0);
-				//tableModel.setValueAt(aValue, index , 1);
+			
+				
+				
 				
 				
 				
@@ -295,103 +281,160 @@ public class BankGUI extends JFrame {
 //						formattedDate ,accOwner,cBal,
 //						"", minBal, intRate});
 //				b.updateAcc(index, a);
-			
+				tableModel = (DefaultTableModel) accountsTable.getModel();
+				if (accountsTable.getSelectedRow()==-1){
+					if(accountsTable.getRowCount() ==0) {
+						JOptionPane.showMessageDialog
+						(null, "Table is empty"); 
+					}
+					else {
+						JOptionPane.showMessageDialog
+						(null, "You must select a row"); 
+					}
+				}
 
-//				int days = 0, month = 0, year = 0;
-//				String dateS = textField_2.getText();
-//				try {
-//					String[] splitDate = dateS.split("-");
-//					days = Integer.parseInt(splitDate[0]);
-//					month = (Integer.parseInt(splitDate[1])-1);
-//					year = Integer.parseInt(splitDate[2]);
-//					if (days >31 || days < 1 || month >12 || month <0 || year <0)
-//						JOptionPane.showMessageDialog(null, "Invalid Date");
-//				}
-//				catch(Exception e) {
-//					JOptionPane.showMessageDialog(null, "Date format is dd-mm-yyyy");
-//				}
-//				GregorianCalendar gDate = new GregorianCalendar(year, month, days);
-//				String formattedDate = Account.formatDate(gDate);
-//				/**************************accountNum********************/
-//
-//				String accNumS = textField.getText();
-//				int accNum;
-//				if (accNumS.equals("")) {
-//					accNum = 0;
-//				}
-//				else {
-//					accNum = Integer.parseInt(accNumS);
-//				}
-//				/**************************AccountOwner********************/
-//				String accOwner = textField_1.getText();
-//
-//				/**************************CurrentBalance********************/
-//				String cBalS = textField_3.getText();
-//				double cBal;
-//				if (cBalS.equals("")) {
-//					cBal = 0;
-//				}
-//				else {
-//					cBal = Double.parseDouble(cBalS);
-//				}
-//				/**************************MonthlyFee********************/
-//				String mFeeS = textField_4.getText();
-//				double mFee;
-//				if (mFeeS.equals("")) {
-//					mFee = 0;
-//				}
-//				else {
-//					mFee = Double.parseDouble(mFeeS);
-//				}
-//				/**************************MinBalance********************/
-//				String minBalS = textField_5.getText();
-//				double minBal;
-//				if (minBalS.equals("")) {
-//					minBal = 0;
-//				}
-//				else {
-//					minBal = Double.parseDouble(minBalS);
-//				}
-//				/**************************IntRate********************/
-//				String intRateS = textField_6.getText();
-//				double intRate;
-//				if (intRateS.equals("")) {
-//					intRate = 0;
-//				}
-//				else {
-//					intRate = Double.parseDouble(intRateS);
-//				}
-//
-//				if (textField_4.isEditable() && textField_5.isEditable()) {
-//					JOptionPane.showMessageDialog
-//					(null, "You must choose either checking or savings");
-//				}
-//				if (textField_4.isEditable()){
-//					Account a = new CheckingAccount(accNum, accOwner, cBal,
-//							gDate, mFee);
-//					b.addAcc(a);
+				int days = 0, month = 0, year = 0;
+				String dateS = textField_2.getText();
+				try {
+					String[] splitDate = dateS.split("-");
+					days = Integer.parseInt(splitDate[0]);
+					month = (Integer.parseInt(splitDate[1])-1);
+					year = Integer.parseInt(splitDate[2]);
+					if (days >31 || days < 1 || month >12 || month <0 || year <0)
+						JOptionPane.showMessageDialog(null, "Invalid Date");
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Date format is dd-mm-yyyy");
+				}
+				GregorianCalendar gDate = new GregorianCalendar(year, month, days);
+				String formattedDate = Account.formatDate(gDate);
+				/**************************accountNum********************/
+
+				String accNumS = textField.getText();
+				int accNum;
+				if (accNumS.equals("")) {
+					accNum = 0;
+				}
+				else {
+					accNum = Integer.parseInt(accNumS);
+				}
+				/**************************AccountOwner********************/
+				String accOwner = textField_1.getText();
+
+				/**************************CurrentBalance********************/
+				String cBalS = textField_3.getText();
+				double cBal;
+				if (cBalS.equals("")) {
+					cBal = 0;
+				}
+				else {
+					cBal = Double.parseDouble(cBalS);
+				}
+				/**************************MonthlyFee********************/
+				String mFeeS = textField_4.getText();
+				double mFee;
+				if (mFeeS.equals("")) {
+					mFee = 0;
+				}
+				else {
+					mFee = Double.parseDouble(mFeeS);
+				}
+				/**************************MinBalance********************/
+				String minBalS = textField_5.getText();
+				double minBal;
+				if (minBalS.equals("")) {
+					minBal = 0;
+				}
+				else {
+					minBal = Double.parseDouble(minBalS);
+				}
+				/**************************IntRate********************/
+				String intRateS = textField_6.getText();
+				double intRate;
+				if (intRateS.equals("")) {
+					intRate = 0;
+				}
+				else {
+					intRate = Double.parseDouble(intRateS);
+				}
+
+				if (textField_4.isEditable() && textField_5.isEditable()) {
+					JOptionPane.showMessageDialog
+					(null, "You must choose either checking or savings");
+				}
+				if (textField_4.isEditable()){
+					Account a = new CheckingAccount(accNum, accOwner, cBal,
+							gDate, mFee);
+					b.addAcc(a);
+					
+					int index = getIndex();		
+					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
+					tableModel.setValueAt(accNum, index, 0);
+					tableModel.setValueAt(formattedDate, index, 1);
+					tableModel.setValueAt(accOwner, index, 2);
+					tableModel.setValueAt(cBal, index, 3);
+					tableModel.setValueAt(mFee, index, 4);
+					tableModel.setValueAt(0, index, 5);
+					tableModel.setValueAt(0, index, 6);
 //					tableModel = (DefaultTableModel)
 //							accountsTable.getModel();
 //					tableModel.addRow(new Object[]{accNum,
 //							formattedDate ,accOwner,cBal,
 //							mFee});
-//					b.updateAcc(index, a);
-//				}
-//
-//				if (textField_5.isEditable()) {
-//					Account a = new SavingsAccount(accNum, accOwner, cBal,
-//							gDate, minBal, intRate);
-//
-//					b.addAcc(a);
+					b.updateAcc(index, a);
+				}
+
+				if (textField_5.isEditable()) {
+					Account a = new SavingsAccount(accNum, accOwner, cBal,
+							gDate, minBal, intRate);
+
+					b.addAcc(a);
+					int index = getIndex();		
+					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
+					tableModel.setValueAt(accNum, index, 0);
+					tableModel.setValueAt(formattedDate, index, 1);
+					tableModel.setValueAt(accOwner, index, 2);
+					tableModel.setValueAt(cBal, index, 3);
+					tableModel.setValueAt(0, index, 4);
+					tableModel.setValueAt(minBal, index, 5);
+					tableModel.setValueAt(intRate, index, 6);
 //					tableModel = (DefaultTableModel)
 //							accountsTable.getModel();
 //					tableModel.addRow(new Object[]{accNum,
 //							formattedDate ,accOwner,cBal,
 //							"", minBal, intRate});
-//					b.updateAcc(index, a);
-//
-//				}
+					b.updateAcc(index, a);
+
+				}
 				
+				
+				
+				
+				
+				
+//				tableModel = (DefaultTableModel) accountsTable.getModel();
+//				if (accountsTable.getSelectedRow()==-1){
+//					if(accountsTable.getRowCount() ==0) {
+//						JOptionPane.showMessageDialog
+//						(null, "Table is empty"); 
+//					}
+//					else {
+//						JOptionPane.showMessageDialog
+//						(null, "You must select a row"); 
+//					}
+//				}
+					//tableModel.removeRow(index);
+//					
+//				
+//					int index = getIndex();		
+//					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
+//					tableModel.setValueAt(accNum, index, 0);
+//					tableModel.setValueAt(accOwner, index, 1);
+//					tableModel.setValueAt(cBal, index, 2);
+//					tableModel.setValueAt(gDate, index, 3);
+//					tableModel.setValueAt(mFee, index, 4);
+//					tableModel.setValueAt(minBal, index, 5);
+//					tableModel.setValueAt(intRate, index, 6);
 
 
 
@@ -446,6 +489,8 @@ public class BankGUI extends JFrame {
 				if (textField_5.isEditable()) {
 					textField_5.setEditable(false);
 					textField_6.setEditable(false);
+					textField_5.setText("");
+					textField_6.setText("");
 				}
 				else {
 					textField_5.setEditable(true);
@@ -462,6 +507,7 @@ public class BankGUI extends JFrame {
 				if (textField_4.isEditable())
 				{
 					textField_4.setEditable(false);
+					textField_4.setText("");
 				}
 				else {
 					textField_4.setEditable(true);
