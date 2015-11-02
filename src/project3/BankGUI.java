@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -73,9 +76,30 @@ public class BankGUI extends JFrame {
 		mnNewMenu.add(separator);
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Load From text");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					loadText();
+				} catch (Exception e) {
+				
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 
+		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Save As Text");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					b.saveToText();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_3);
 
 		JSeparator separator_1 = new JSeparator();
@@ -610,6 +634,19 @@ public class BankGUI extends JFrame {
 		});
 
 	}
+	
+	public void loadText()throws Exception{
+	    DefaultTableModel dtm = (DefaultTableModel) accountsTable.getModel();
+	   BufferedReader bfw = new BufferedReader(new FileReader("C:\\Users\\John\\BankApp\\accountsText"));
+
+	  for (int i = 0 ; i < accountsTable.getRowCount(); i++)
+	  {
+	dtm.addRow(new Object[] { bfw.readLine()});
+	  }
+	  bfw.close();
+	  
+	}
+	
 	public void setIndex(int i) {
 		index = i;
 	}

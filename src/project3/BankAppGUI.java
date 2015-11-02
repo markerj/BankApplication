@@ -80,6 +80,11 @@ public class BankAppGUI extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Save As Text");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
 		mnNewMenu.add(mntmNewMenuItem_3);
 		
 		JSeparator separator_1 = new JSeparator();

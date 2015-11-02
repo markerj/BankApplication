@@ -1,7 +1,13 @@
 package project3;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import javax.swing.AbstractListModel;
+import javax.swing.table.DefaultTableModel;
 
 public class BankModel extends AbstractListModel{
 
@@ -18,7 +24,14 @@ public class BankModel extends AbstractListModel{
 		//fireContentsChanged(this, acts.size()-1, acts.size()-1);
 		
 	}
-
+	public void saveToText() throws FileNotFoundException {
+	    PrintWriter pw = new PrintWriter(new FileOutputStream("C:\\Users\\John\\BankApp\\accountsText"));
+	    for (Account acc : acts)
+	        pw.println(acts.toString());
+	    pw.close();
+	}
+	
+	
 	public void addAcc(Account a) {
 		acts.add(a);		
 		System.out.println("added to arraylist");
