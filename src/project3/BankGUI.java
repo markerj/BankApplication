@@ -33,13 +33,10 @@ public class BankGUI extends JFrame {
 	private BankModel b;
 	private int selections[];
 	private int index;
-
 	private JRadioButton rdbtnChecking;
 	private JRadioButton rdbtnSavings;
-
 	private JList accountsList;
 	private DefaultListModel listModel;
-
 	private DefaultTableModel tableModel;
 	private JTable accountsTable;
 
@@ -48,35 +45,14 @@ public class BankGUI extends JFrame {
 		BankGUI frame = new BankGUI();
 		frame.setVisible(true);
 
-
 	}
 
 	public BankGUI() {
 
 		b = new BankModel();
 
-
-
-		//		tableModel = new DefaultTableModel();
-		//		JTable accountsTable = new JTable(tableModel);
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addColumn("New Column");
-		//		tableModel.addRow
-		//		(new String[][] {
-		//				{null,null,null,null,null,null,null},
-		//				{null,null,null,null,null,null,null}
-		//				}
-		//				);
-
-
 		//listModel = new DefaultListModel();
 		//JList accountsList = new JList(listModel);
-
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 650);
@@ -137,6 +113,7 @@ public class BankGUI extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+					
 				if (rdbtnChecking.isSelected() && rdbtnSavings.isSelected()) {
 					JOptionPane.showMessageDialog(null, "You must pick either checkings or savings");
 				}
@@ -159,58 +136,96 @@ public class BankGUI extends JFrame {
 				/**************************accountNum********************/
 
 				String accNumS = textField.getText();
-				int accNum;
+				int accNum = 0;
+				
+				
 				if (accNumS.equals("")) {
 					accNum = 0;
 				}
 				else {
+					try {
 					accNum = Integer.parseInt(accNumS);
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid account number");
+						
+					}
 				}
+
 				/**************************AccountOwner********************/
 				String accOwner = textField_1.getText();
 
 				/**************************CurrentBalance********************/
 				String cBalS = textField_3.getText();
-				double cBal;
+				double cBal=0;
 				if (cBalS.equals("")) {
 					cBal = 0;
 				}
 				else {
-					cBal = Double.parseDouble(cBalS);
+					try {
+						cBal = Double.parseDouble(cBalS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid current balance");
+						}
+					
 				}
 				/**************************MonthlyFee********************/
 				String mFeeS = textField_4.getText();
-				double mFee;
+				double mFee=0;
 				if (mFeeS.equals("")) {
 					mFee = 0;
 				}
 				else {
-					mFee = Double.parseDouble(mFeeS);
+					try {
+						mFee = Double.parseDouble(mFeeS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid monthly fee");
+						}
+					
 				}
 				/**************************MinBalance********************/
 				String minBalS = textField_5.getText();
-				double minBal;
+				double minBal=0;
 				if (minBalS.equals("")) {
 					minBal = 0;
 				}
 				else {
-					minBal = Double.parseDouble(minBalS);
+					try {
+						minBal = Double.parseDouble(minBalS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
+						}
+					
+					
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
-				double intRate;
+				double intRate=0;
 				if (intRateS.equals("")) {
 					intRate = 0;
 				}
 				else {
-					intRate = Double.parseDouble(intRateS);
+					try {
+						intRate = Double.parseDouble(intRateS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid account number");
+						}
+					
+					
 				}
 
+				
+				
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
 				}
-				if (textField_4.isEditable()){
+				if (textField_4.isEditable() && cBal > 0 && mFee >0){
+					
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
 					b.addAcc(a);
@@ -220,7 +235,7 @@ public class BankGUI extends JFrame {
 							formattedDate ,accOwner,cBal,
 							mFee});
 				}
-				if (textField_5.isEditable()) {
+				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
 
@@ -236,9 +251,6 @@ public class BankGUI extends JFrame {
 		});
 		btnAdd.setBounds(606, 423, 89, 23);	
 		contentPane.add(btnAdd);
-
-
-
 
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
@@ -306,61 +318,98 @@ public class BankGUI extends JFrame {
 				/**************************accountNum********************/
 
 				String accNumS = textField.getText();
-				int accNum;
+				int accNum = 0;
+				
+				
 				if (accNumS.equals("")) {
 					accNum = 0;
 				}
 				else {
+					try {
 					accNum = Integer.parseInt(accNumS);
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid account number");
+						
+					}
 				}
+
 				/**************************AccountOwner********************/
 				String accOwner = textField_1.getText();
 
 				/**************************CurrentBalance********************/
 				String cBalS = textField_3.getText();
-				double cBal;
+				double cBal=0;
 				if (cBalS.equals("")) {
 					cBal = 0;
 				}
 				else {
-					cBal = Double.parseDouble(cBalS);
+					try {
+						cBal = Double.parseDouble(cBalS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid current balance");
+						}
+					
 				}
 				/**************************MonthlyFee********************/
 				String mFeeS = textField_4.getText();
-				double mFee;
+				double mFee=0;
 				if (mFeeS.equals("")) {
 					mFee = 0;
 				}
 				else {
-					mFee = Double.parseDouble(mFeeS);
+					try {
+						mFee = Double.parseDouble(mFeeS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid monthly fee");
+						}
+					
 				}
 				/**************************MinBalance********************/
 				String minBalS = textField_5.getText();
-				double minBal;
+				double minBal=0;
 				if (minBalS.equals("")) {
 					minBal = 0;
 				}
 				else {
-					minBal = Double.parseDouble(minBalS);
+					try {
+						minBal = Double.parseDouble(minBalS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
+						}
+					
+					
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
-				double intRate;
+				double intRate=0;
 				if (intRateS.equals("")) {
 					intRate = 0;
 				}
 				else {
-					intRate = Double.parseDouble(intRateS);
+					try {
+						intRate = Double.parseDouble(intRateS);
+						}
+						catch(Exception e) {
+							JOptionPane.showMessageDialog(null, "Invalid account number");
+						}
+					
+					
 				}
+				
+				
 
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
 				}
-				if (textField_4.isEditable()){
+				if (textField_4.isEditable() && cBal > 0 && mFee > 0){
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
-					b.addAcc(a);
+				
 
 					int index = getIndex();		
 					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
@@ -369,8 +418,8 @@ public class BankGUI extends JFrame {
 					tableModel.setValueAt(accOwner, index, 2);
 					tableModel.setValueAt(cBal, index, 3);
 					tableModel.setValueAt(mFee, index, 4);
-					tableModel.setValueAt(0, index, 5);
-					tableModel.setValueAt(0, index, 6);
+					tableModel.setValueAt("", index, 5);
+					tableModel.setValueAt("", index, 6);
 					//					tableModel = (DefaultTableModel)
 					//							accountsTable.getModel();
 					//					tableModel.addRow(new Object[]{accNum,
@@ -379,18 +428,18 @@ public class BankGUI extends JFrame {
 					b.updateAcc(index, a);
 				}
 
-				if (textField_5.isEditable()) {
+				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
 
-					b.addAcc(a);
+			
 					int index = getIndex();		
 					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
 					tableModel.setValueAt(accNum, index, 0);
 					tableModel.setValueAt(formattedDate, index, 1);
 					tableModel.setValueAt(accOwner, index, 2);
 					tableModel.setValueAt(cBal, index, 3);
-					tableModel.setValueAt(0, index, 4);
+					tableModel.setValueAt("", index, 4);
 					tableModel.setValueAt(minBal, index, 5);
 					tableModel.setValueAt(intRate, index, 6);
 					//					tableModel = (DefaultTableModel)
@@ -401,10 +450,6 @@ public class BankGUI extends JFrame {
 					b.updateAcc(index, a);
 
 				}
-
-
-
-
 
 			}
 		});
@@ -417,6 +462,13 @@ public class BankGUI extends JFrame {
 
 				((DefaultTableModel)accountsTable.getModel()).setNumRows(0);
 				b.deleteAll();
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+				textField_5.setText("");
+				textField_6.setText("");
 
 			}
 		});
@@ -454,6 +506,7 @@ public class BankGUI extends JFrame {
 		rdbtnChecking = new JRadioButton("Checking");
 		rdbtnChecking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
 				if (textField_5.isEditable()) {
 					textField_5.setEditable(false);
 					textField_6.setEditable(false);
@@ -472,6 +525,7 @@ public class BankGUI extends JFrame {
 		rdbtnSavings = new JRadioButton("Savings");
 		rdbtnSavings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
 				if (textField_4.isEditable())
 				{
 					textField_4.setEditable(false);

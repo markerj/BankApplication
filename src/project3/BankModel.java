@@ -11,27 +11,30 @@ public class BankModel extends AbstractListModel{
 		acts = new ArrayList();
 
 	}
-	//add method in gui for find?
 
 	public void updateAcc(int index, Account a) {
-		acts.add(a);	
-		fireContentsChanged(this, acts.size()-1, acts.size()-1);
-
+		acts.add(index, a);	
+		System.out.println("added to arraylist");
+		//fireContentsChanged(this, acts.size()-1, acts.size()-1);
+		
 	}
 
 	public void addAcc(Account a) {
 		acts.add(a);		
 		System.out.println("added to arraylist");
-		fireIntervalAdded(this, acts.size()-1, acts.size()-1);
+		//fireIntervalAdded(this, acts.size()-1, acts.size()-1);
 	}
 	
 	public void deleteAll() {
+		
 		acts.clear();
+		System.out.println("arraylist cleared");
 	}
 	public void deleteAcc(int index) {
 
 		acts.remove(index);
-		fireIntervalRemoved(this, acts.size()-1, acts.size()-1);
+		System.out.println("removed from arraylist");
+		//fireIntervalRemoved(this, acts.size()-1, acts.size()-1);
 	}
 
 	@Override
