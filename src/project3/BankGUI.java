@@ -109,7 +109,6 @@ public class BankGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,8 +135,7 @@ public class BankGUI extends JFrame {
 				/**************************accountNum********************/
 
 				String accNumS = textField.getText();
-				int accNum = 0;
-				
+				int accNum = 0;			
 				
 				if (accNumS.equals("")) {
 					accNum = 0;
@@ -198,8 +196,7 @@ public class BankGUI extends JFrame {
 						catch(Exception e) {
 							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
 						}
-					
-					
+							
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
@@ -213,13 +210,8 @@ public class BankGUI extends JFrame {
 						}
 						catch(Exception e) {
 							JOptionPane.showMessageDialog(null, "Invalid account number");
-						}
-					
-					
-				}
-
-				
-				
+						}	
+				}		
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
@@ -269,7 +261,6 @@ public class BankGUI extends JFrame {
 				//	b.deleteAcc(index);
 				//	listModel.remove(index);
 				//int numCols = accountsTable.getModel().getColumnCount();
-
 
 			}
 		});
@@ -333,7 +324,6 @@ public class BankGUI extends JFrame {
 						
 					}
 				}
-
 				/**************************AccountOwner********************/
 				String accOwner = textField_1.getText();
 
@@ -349,8 +339,7 @@ public class BankGUI extends JFrame {
 						}
 						catch(Exception e) {
 							JOptionPane.showMessageDialog(null, "Invalid current balance");
-						}
-					
+						}				
 				}
 				/**************************MonthlyFee********************/
 				String mFeeS = textField_4.getText();
@@ -364,8 +353,7 @@ public class BankGUI extends JFrame {
 						}
 						catch(Exception e) {
 							JOptionPane.showMessageDialog(null, "Invalid monthly fee");
-						}
-					
+						}					
 				}
 				/**************************MinBalance********************/
 				String minBalS = textField_5.getText();
@@ -379,9 +367,7 @@ public class BankGUI extends JFrame {
 						}
 						catch(Exception e) {
 							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
-						}
-					
-					
+						}				
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
@@ -394,14 +380,10 @@ public class BankGUI extends JFrame {
 						intRate = Double.parseDouble(intRateS);
 						}
 						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid account number");
-						}
-					
-					
+							JOptionPane.showMessageDialog(null, "Invalid interest rate number");
+						}				
 				}
-				
-				
-
+	
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
@@ -410,9 +392,9 @@ public class BankGUI extends JFrame {
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
 				
-
 					int index = getIndex();		
-					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
+					//set each col for index row, textfield is 0,
+					//texfield1 is 1, and so on for each update click
 					tableModel.setValueAt(accNum, index, 0);
 					tableModel.setValueAt(formattedDate, index, 1);
 					tableModel.setValueAt(accOwner, index, 2);
@@ -420,19 +402,13 @@ public class BankGUI extends JFrame {
 					tableModel.setValueAt(mFee, index, 4);
 					tableModel.setValueAt("", index, 5);
 					tableModel.setValueAt("", index, 6);
-					//					tableModel = (DefaultTableModel)
-					//							accountsTable.getModel();
-					//					tableModel.addRow(new Object[]{accNum,
-					//							formattedDate ,accOwner,cBal,
-					//							mFee});
 					b.updateAcc(index, a);
 				}
 
 				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
-
-			
+	
 					int index = getIndex();		
 					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
 					tableModel.setValueAt(accNum, index, 0);
@@ -442,15 +418,9 @@ public class BankGUI extends JFrame {
 					tableModel.setValueAt("", index, 4);
 					tableModel.setValueAt(minBal, index, 5);
 					tableModel.setValueAt(intRate, index, 6);
-					//					tableModel = (DefaultTableModel)
-					//							accountsTable.getModel();
-					//					tableModel.addRow(new Object[]{accNum,
-					//							formattedDate ,accOwner,cBal,
-					//							"", minBal, intRate});
 					b.updateAcc(index, a);
 
 				}
-
 			}
 		});
 		btnUpdate.setBounds(606, 491, 89, 23);
@@ -538,8 +508,6 @@ public class BankGUI extends JFrame {
 		});
 		rdbtnSavings.setBounds(403, 362, 89, 23);
 		contentPane.add(rdbtnSavings);
-
-
 
 		textField = new JTextField();
 		textField.setBounds(133, 392, 435, 20);

@@ -34,8 +34,9 @@ public class SavingsAccount extends Account{
 	public void setInterestRate(double interestRate) {
 		this.interestRate = interestRate;
 	}
+	@Override
 	public String toString() {
-		//overridden
+	
 		String num = Integer.toString(this.getNumber());
 		String own = this.getOwner();
 		String bal = Double.toString(this.getBalance());
@@ -63,7 +64,5 @@ public class SavingsAccount extends Account{
 		}
 		return false;
 	}
-	
-	
-	
+		
 }

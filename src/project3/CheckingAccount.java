@@ -27,6 +27,7 @@ public class CheckingAccount extends Account{
 	public void setMonthlyFee(double monthlyFee) {
 		this.monthlyFee = monthlyFee;
 	}
+	@Override
 	public String toString() {
 		//overridden
 		String num = Integer.toString(this.getNumber());

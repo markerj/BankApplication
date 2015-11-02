@@ -53,9 +53,10 @@ public abstract class Account implements Serializable {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public String ToStrig() {
-		
-		return number + owner + dateOpened + balance;
+	public abstract String toString();
+	
+	public boolean equals() {
+		return true;
 	}
 	
 	public static String formatDate(GregorianCalendar calendar){
