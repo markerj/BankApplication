@@ -6,8 +6,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -70,6 +74,20 @@ public class BankGUI extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save As Binary");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					b.saveToBinary();
+					JOptionPane.showMessageDialog(null, "Saved to binary file");
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 
 		JSeparator separator = new JSeparator();
@@ -94,6 +112,7 @@ public class BankGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					b.saveToText();
+					JOptionPane.showMessageDialog(null, "Saved to text file");
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -251,7 +270,7 @@ public class BankGUI extends JFrame {
 							formattedDate ,accOwner,cBal,
 							mFee});
 				}
-				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
+			    if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0 ) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
 
@@ -276,7 +295,6 @@ public class BankGUI extends JFrame {
 				}
 				int index = getIndex();
 				b.deleteAcc(index);
-				//tableModel.removeRow(index);
 				DefaultTableModel tableModel = (DefaultTableModel)
 						accountsTable.getModel();
 				tableModel.removeRow(index);
@@ -323,7 +341,7 @@ public class BankGUI extends JFrame {
 					month = (Integer.parseInt(splitDate[1])-1);
 					year = Integer.parseInt(splitDate[2]);
 					if (days >31 || days < 1 || month >12 || month <0 || year <0)
-						JOptionPane.showMessageDialog(null, "Invalid Date");
+						JOptionPane.showMessageDialog(null, "Invalid date");
 				}
 				catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Date format is dd-mm-yyyy");
@@ -636,15 +654,31 @@ public class BankGUI extends JFrame {
 	}
 	
 	public void loadText()throws Exception{
-	    DefaultTableModel dtm = (DefaultTableModel) accountsTable.getModel();
-	   BufferedReader bfw = new BufferedReader(new FileReader("C:\\Users\\John\\BankApp\\accountsText"));
+		int size = b.getArraySize();
+		String[] accs = null;
+		tableModel = (DefaultTableModel) accountsTable.getModel();
+		//int i= 0;
+		try{
+		    FileInputStream fistream = new FileInputStream("C:\\Users\\John\\BankApp\\accountsText");
+		          DataInputStream input = new DataInputStream(fistream);
+		          BufferedReader br = new BufferedReader(new InputStreamReader(input));
+		          String strLine;
+		                  
+		          while ((strLine = br.readLine()) != null)   {
+		        	  
+		    accs = strLine.split(" ");   
+		    System.out.println(accs[0]);
+		   
+		    
+		    tableModel.addRow(new Object[]{accs[0],
+					accs[1] ,accs[2],accs[3],
+					accs[4], accs[5], accs[6]});
 
-	  for (int i = 0 ; i < accountsTable.getRowCount(); i++)
-	  {
-	dtm.addRow(new Object[] { bfw.readLine()});
-	  }
-	  bfw.close();
-	  
+		   }	          
+		   input.close();
+		   }catch (Exception e){
+		     System.err.println("Error: " + e.getMessage());
+		   } 
 	}
 	
 	public void setIndex(int i) {

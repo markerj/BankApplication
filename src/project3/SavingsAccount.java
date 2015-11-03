@@ -44,9 +44,10 @@ public class SavingsAccount extends Account{
 		String minB = Double.toString(this.getMinBalance());
 		String intR = Double.toString(this.getInterestRate());
 		
-		return num + " " +own + " " + 
-		bal + " " + dO + " " + 
+		return num + " " + dO + " " + 
+		own + " " + bal + " " + "0" + " " +
 		minB + " " + intR;
+		
 	}
 	
 	public boolean equals(Object o){

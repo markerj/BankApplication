@@ -36,8 +36,8 @@ public class CheckingAccount extends Account{
 		String dO = formatDate(this.getDateOpened());
 		String mFee = Double.toString(this.monthlyFee);	
 
-		return num + "  "+  dO + " " + 
-		own + "  "+  bal+ "  " + mFee;
+		return num + " "+  dO + " " + 
+		own + " "+  bal + " " + mFee + " " + "0" + " " + "0";
 
 		//+ "MonthlyFee(checking Exlusively):" + mFee;
 	}
