@@ -80,10 +80,10 @@ public class BankGUI extends JFrame {
 					b.saveToBinary();
 					JOptionPane.showMessageDialog(null, "Saved to binary file");
 				} catch (FileNotFoundException e) {
-					
+
 					e.printStackTrace();
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				}
 			}
@@ -99,14 +99,14 @@ public class BankGUI extends JFrame {
 				try {
 					loadText();
 				} catch (Exception e) {
-				
+
 					e.printStackTrace();
 				}
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 
-		
+
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Save As Text");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -155,7 +155,7 @@ public class BankGUI extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					
+
 				if (rdbtnChecking.isSelected() && rdbtnSavings.isSelected()) {
 					JOptionPane.showMessageDialog(null, "You must pick either checkings or savings");
 				}
@@ -167,8 +167,8 @@ public class BankGUI extends JFrame {
 					days = Integer.parseInt(splitDate[0]);
 					month = (Integer.parseInt(splitDate[1])-1);
 					year = Integer.parseInt(splitDate[2]);
-					if (days >31 || days < 1 || month >12 || month <0 || year <0)
-						JOptionPane.showMessageDialog(null, "Invalid Date");
+					//					if (days >31 || days < 1 || month >12 || month <0 || year <0)
+					//						JOptionPane.showMessageDialog(null, "Invalid Date");
 				}
 				catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Date format is dd-mm-yyyy");
@@ -179,17 +179,17 @@ public class BankGUI extends JFrame {
 
 				String accNumS = textField.getText();
 				int accNum = 0;			
-				
+
 				if (accNumS.equals("")) {
 					accNum = 0;
 				}
 				else {
 					try {
-					accNum = Integer.parseInt(accNumS);
+						accNum = Integer.parseInt(accNumS);
 					}
 					catch(Exception e) {
 						JOptionPane.showMessageDialog(null, "Invalid account number");
-						
+
 					}
 				}
 
@@ -205,11 +205,11 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						cBal = Double.parseDouble(cBalS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid current balance");
-						}
-					
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid current balance");
+					}
+
 				}
 				/**************************MonthlyFee********************/
 				String mFeeS = textField_4.getText();
@@ -220,11 +220,11 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						mFee = Double.parseDouble(mFeeS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid monthly fee");
-						}
-					
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid monthly fee");
+					}
+
 				}
 				/**************************MinBalance********************/
 				String minBalS = textField_5.getText();
@@ -235,11 +235,11 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						minBal = Double.parseDouble(minBalS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
-						}
-							
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid minimun balance");
+					}
+
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
@@ -250,27 +250,29 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						intRate = Double.parseDouble(intRateS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid account number");
-						}	
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid account number");
+					}	
 				}		
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
 				}
-				if (textField_4.isEditable() && cBal > 0 && mFee >0){
-					
+				if (textField_4.isEditable() && cBal > 0 && mFee >0 && dateS.contains("-")){
+
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
 					b.addAcc(a);
 					DefaultTableModel tableModel = (DefaultTableModel)
 							accountsTable.getModel();
+
 					tableModel.addRow(new Object[]{accNum,
 							formattedDate ,accOwner,cBal,
 							mFee});
+
 				}
-			    if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0 ) {
+				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0 && dateS.contains("-")) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
 
@@ -352,18 +354,18 @@ public class BankGUI extends JFrame {
 
 				String accNumS = textField.getText();
 				int accNum = 0;
-				
-				
+
+
 				if (accNumS.equals("")) {
 					accNum = 0;
 				}
 				else {
 					try {
-					accNum = Integer.parseInt(accNumS);
+						accNum = Integer.parseInt(accNumS);
 					}
 					catch(Exception e) {
 						JOptionPane.showMessageDialog(null, "Invalid account number");
-						
+
 					}
 				}
 				/**************************AccountOwner********************/
@@ -378,10 +380,10 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						cBal = Double.parseDouble(cBalS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid current balance");
-						}				
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid current balance");
+					}				
 				}
 				/**************************MonthlyFee********************/
 				String mFeeS = textField_4.getText();
@@ -392,10 +394,10 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						mFee = Double.parseDouble(mFeeS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid monthly fee");
-						}					
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid monthly fee");
+					}					
 				}
 				/**************************MinBalance********************/
 				String minBalS = textField_5.getText();
@@ -406,10 +408,10 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						minBal = Double.parseDouble(minBalS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid minimun balance");
-						}				
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid minimun balance");
+					}				
 				}
 				/**************************IntRate********************/
 				String intRateS = textField_6.getText();
@@ -420,12 +422,12 @@ public class BankGUI extends JFrame {
 				else {
 					try {
 						intRate = Double.parseDouble(intRateS);
-						}
-						catch(Exception e) {
-							JOptionPane.showMessageDialog(null, "Invalid interest rate number");
-						}				
+					}
+					catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Invalid interest rate number");
+					}				
 				}
-	
+
 				if (textField_4.isEditable() && textField_5.isEditable()) {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
@@ -433,7 +435,7 @@ public class BankGUI extends JFrame {
 				if (textField_4.isEditable() && cBal > 0 && mFee > 0){
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
-				
+
 					int index = getIndex();		
 					//set each col for index row, textfield is 0,
 					//texfield1 is 1, and so on for each update click
@@ -450,7 +452,7 @@ public class BankGUI extends JFrame {
 				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
-	
+
 					int index = getIndex();		
 					//set each col for index row, textfield is 0, texfield1 is 1, and so on for each update click
 					tableModel.setValueAt(accNum, index, 0);
@@ -518,7 +520,7 @@ public class BankGUI extends JFrame {
 		rdbtnChecking = new JRadioButton("Checking");
 		rdbtnChecking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+
 				if (textField_5.isEditable()) {
 					textField_5.setEditable(false);
 					textField_6.setEditable(false);
@@ -537,7 +539,7 @@ public class BankGUI extends JFrame {
 		rdbtnSavings = new JRadioButton("Savings");
 		rdbtnSavings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+
 				if (textField_4.isEditable())
 				{
 					textField_4.setEditable(false);
@@ -652,35 +654,35 @@ public class BankGUI extends JFrame {
 		});
 
 	}
-	
+
 	public void loadText()throws Exception{
 		int size = b.getArraySize();
 		String[] accs = null;
 		tableModel = (DefaultTableModel) accountsTable.getModel();
 		//int i= 0;
 		try{
-		    FileInputStream fistream = new FileInputStream("C:\\Users\\John\\BankApp\\accountsText");
-		          DataInputStream input = new DataInputStream(fistream);
-		          BufferedReader br = new BufferedReader(new InputStreamReader(input));
-		          String strLine;
-		                  
-		          while ((strLine = br.readLine()) != null)   {
-		        	  
-		    accs = strLine.split(" ");   
-		    System.out.println(accs[0]);
-		   
-		    
-		    tableModel.addRow(new Object[]{accs[0],
-					accs[1] ,accs[2],accs[3],
-					accs[4], accs[5], accs[6]});
+			FileInputStream fistream = new FileInputStream("C:\\Users\\John\\BankApp\\accountsText");
+			DataInputStream input = new DataInputStream(fistream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(input));
+			String strLine;
 
-		   }	          
-		   input.close();
-		   }catch (Exception e){
-		     System.err.println("Error: " + e.getMessage());
-		   } 
+			while ((strLine = br.readLine()) != null)   {
+
+				accs = strLine.split(" ");   
+				System.out.println(accs[0]);
+
+
+				tableModel.addRow(new Object[]{accs[0],
+						accs[1] ,accs[2],accs[3],
+						accs[4], accs[5], accs[6]});
+
+			}	          
+			input.close();
+		}catch (Exception e){
+			System.err.println("Error: " + e.getMessage());
+		} 
 	}
-	
+
 	public void setIndex(int i) {
 		index = i;
 	}
