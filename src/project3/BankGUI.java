@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -70,7 +71,18 @@ public class BankGUI extends JFrame {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 
-		JMenuItem mntmNewMenuItem = new JMenuItem("Load From Binary");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Load From Binary");		
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					loadBinary();
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		mnNewMenu.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save As Binary");
@@ -117,6 +129,7 @@ public class BankGUI extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_3);
@@ -280,7 +293,7 @@ public class BankGUI extends JFrame {
 					DefaultTableModel tableModel = (DefaultTableModel)
 							accountsTable.getModel();
 					tableModel.addRow(new Object[]{accNum,
-							formattedDate ,accOwner,cBal,
+							formattedDate, accOwner, cBal,
 							"", minBal, intRate});
 				}
 
@@ -432,7 +445,7 @@ public class BankGUI extends JFrame {
 					JOptionPane.showMessageDialog
 					(null, "You must choose either checking or savings");
 				}
-				if (textField_4.isEditable() && cBal > 0 && mFee > 0){
+				if (textField_4.isEditable() && cBal > 0 && mFee > 0 && dateS.contains("-")){
 					Account a = new CheckingAccount(accNum, accOwner, cBal,
 							gDate, mFee);
 
@@ -449,7 +462,7 @@ public class BankGUI extends JFrame {
 					b.updateAcc(index, a);
 				}
 
-				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0) {
+				if (textField_5.isEditable() && cBal > 0 && minBal > 0 && intRate > 0  && dateS.contains("-")) {
 					Account a = new SavingsAccount(accNum, accOwner, cBal,
 							gDate, minBal, intRate);
 
@@ -654,23 +667,25 @@ public class BankGUI extends JFrame {
 		});
 
 	}
+	public void loadBinary() throws Exception {
+		
+	}
 
 	public void loadText()throws Exception{
 		int size = b.getArraySize();
 		String[] accs = null;
 		tableModel = (DefaultTableModel) accountsTable.getModel();
-		//int i= 0;
+		
 		try{
 			FileInputStream fistream = new FileInputStream("C:\\Users\\John\\BankApp\\accountsText");
 			DataInputStream input = new DataInputStream(fistream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(input));
-			String strLine;
+			String str;
 
-			while ((strLine = br.readLine()) != null)   {
+			while ((str = br.readLine()) != null)   {
 
-				accs = strLine.split(" ");   
+				accs = str.split(" ");   
 				System.out.println(accs[0]);
-
 
 				tableModel.addRow(new Object[]{accs[0],
 						accs[1] ,accs[2],accs[3],
@@ -678,8 +693,8 @@ public class BankGUI extends JFrame {
 
 			}	          
 			input.close();
-		}catch (Exception e){
-			System.err.println("Error: " + e.getMessage());
+		}catch (Exception e) {		
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		} 
 	}
 
